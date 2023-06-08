@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         gold++;
         goldText.text = gold.ToString();
     }
-
+    //Decrease drone if player collide with obstacle or Rai
     public void DecreaseDrone()
     {
         drone--;
