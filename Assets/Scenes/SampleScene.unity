@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 354847813}
   - component: {fileID: 354847812}
   m_Layer: 0
-  m_Name: W3
+  m_Name: W1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   objectPrefabs:
   - {fileID: 354847811}
   - {fileID: 460764697}
-  spawnInterval: 5
+  spawnInterval: 7
   spawnDistance: 1
 --- !u!4 &1611714563
 Transform:
@@ -2324,7 +2324,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 00b9a87b6278f5f4fa4ada5a39e47ccd, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.673
   m_Pitch: 1
   Loop: 1
   Mute: 0
