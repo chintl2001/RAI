@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - HP
   - Rai
+  - Bullet
+  - Pivot
   layers:
   - Default
   - TransparentFX

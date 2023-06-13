@@ -9,11 +9,11 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        gunshot = Resources.Load<AudioClip>("gunshot");
-        jumping = Resources.Load<AudioClip>("jumping");
-        enemydie = Resources.Load<AudioClip>("enemydie");
-        helicopter = Resources.Load<AudioClip>("helicopter");
-        rbrunning = Resources.Load<AudioClip>("robotrunning");
+        gunshot = Resources.Load<AudioClip>("GunShot");
+        jumping = Resources.Load<AudioClip>("Jumping");
+        enemydie = Resources.Load<AudioClip>("EnemyDie");
+        helicopter = Resources.Load<AudioClip>("Helicopter");
+        rbrunning = Resources.Load<AudioClip>("RobotRunning");
 
         audioSource = GetComponent<AudioSource>();
     }

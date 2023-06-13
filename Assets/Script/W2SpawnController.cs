@@ -14,7 +14,7 @@ public class W2SpawnController : MonoBehaviour
     {
         // Gán giá trị cho các biến prefab và danh sách prefab
         dronePrefab = Instantiate(dronePrefab, positions[0].position, Quaternion.identity);
-
+        int i = Random.Range(0, 5);
         // Sinh ngẫu nhiên các prefab từ danh sách prefab
         GameObject randomObstaclePrefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Count)];
         Instantiate(randomObstaclePrefab, positions[2].position, Quaternion.identity);
