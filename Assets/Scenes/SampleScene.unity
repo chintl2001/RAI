@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 206031736}
   - component: {fileID: 206031735}
   - component: {fileID: 206031737}
+  - component: {fileID: 206031738}
   m_Layer: 0
   m_Name: GroundSpawner
   m_TagString: Untagged
@@ -483,6 +484,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 8.91}
   m_EdgeRadius: 0
+--- !u!114 &206031738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206031731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba957f0376b0b94199d6d0dfd543eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacle1: {fileID: 6258461894367261218, guid: cc8b320164a3e3843b3bdd15239a6b39, type: 3}
+  obstacle2: {fileID: 8501421116448726825, guid: e7e6c3d3704f4ba4b90970d48606370d, type: 3}
 --- !u!1 &282363829
 GameObject:
   m_ObjectHideFlags: 0
