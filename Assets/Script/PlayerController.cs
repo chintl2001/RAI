@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isJumping = false;
+            //isJumping = false;
         }
     }
 
