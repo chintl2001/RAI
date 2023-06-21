@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPresistent
 {
     public float jumpForce = 10f;
     public Rigidbody2D rb;
@@ -68,5 +68,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
 
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition= this.transform.position;
+    }
 }
