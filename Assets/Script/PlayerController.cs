@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float jumpForce = 10f;
+    public int jumpCount = 0;
     public Rigidbody2D rb;
     private bool isJumping = false;
 
     public GameObject bulletPrefab;
 
     public float bulletForce = 10f;
+    public float runSpeed;
 
     public GameObject bulletPosition;
 
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        transform.position = Vector3.right * runSpeed * Time.deltaTime + transform.position;
         if (isJumping)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -45,12 +48,16 @@ public class PlayerController : MonoBehaviour
             }
             return;
         }
+        if (jumpCount == 2)
+        {
+            isJumping = false;
+        }
 
         float verticalInput = Input.GetAxis("Vertical");
-        if (verticalInput != 0)
+        if (verticalInput != 0 && !isJumping)
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            isJumping = true;
+            rb.velocity = Vector3.up * jumpForce;
+            jumpCount += 1;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -59,14 +66,16 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            //isJumping = false;
+            isJumping = false;
+            jumpCount = 0;
         }
     }
+
+
 
 
 }
