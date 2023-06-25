@@ -15,6 +15,7 @@ public class BulletController : MonoBehaviour
     private void Start()
     {
         raiCount = GameObject.FindGameObjectsWithTag("Rai").Length; // Khởi tạo số lượng quái Rai
+        Debug.Log(raiCount);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

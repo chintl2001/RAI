@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnBossController : MonoBehaviour
 {
     public GameObject bossPrefab;
-    public float yPosition = -3.321175f;
+    public float yPosition = -1.41f;
 
     public void SpawnBoss()
     {
