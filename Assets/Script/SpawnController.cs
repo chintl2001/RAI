@@ -10,6 +10,8 @@ public class SpawnController : MonoBehaviour
     public float distanceBetweenEnemies = 2f; // Khoảng cách giữa các quái
     public int numberOfEnemies = 10; // Số lượng quái cần spawn
     public float yPosition = -3.321175f;
+    public SpawnBossController bossSpawnController;
+
 
     private void Start()
     {
@@ -43,4 +45,14 @@ public class SpawnController : MonoBehaviour
 
         return spawnPositions;
     }
+
+    public void SpawnBoss()
+    {
+        if (bossSpawnController != null)
+        {
+            bossSpawnController.SpawnBoss();
+        }
+    }
+
+
 }
