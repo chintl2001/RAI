@@ -14,9 +14,12 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     public GameObject bulletPosition;
 
+    public Animator animator;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void FireBullet()
@@ -96,5 +99,9 @@ public class PlayerController : MonoBehaviour, IDataPresistent
     {
             SoundManager.PlaySound("gunshot");
             FireBullet();
+    public void StopAnimation()
+    {
+        animator.enabled = false; // Disable the Animator component
+
     }
 }
