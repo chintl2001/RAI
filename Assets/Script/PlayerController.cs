@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     private bool isJumping = false;
 
-    public GameObject bulletPrefab;
+    public BulletPooling bulletPool;
 
     public float bulletForce = 10f;
 
@@ -21,17 +21,23 @@ public class PlayerController : MonoBehaviour
 
     void FireBullet()
     {
-        // Tạo một viên đạn từ prefab
-        GameObject bullet = Instantiate(bulletPrefab, bulletPosition.transform.position, Quaternion.identity);
+        // Lấy một viên đạn từ object pool
+        GameObject bullet = bulletPool.GetPooledBullet();
 
-        // Lấy tham chiếu tới Rigidbody2D của viên đạn
-        Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
+        if (bullet != null)
+        {
+            bullet.transform.position = bulletPosition.transform.position;
+            bullet.SetActive(true);
 
+            // Lấy tham chiếu tới Rigidbody2D của viên đạn
+            Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
 
-        // Tính toán hướng di chuyển và khoảng cách dựa trên hai điểm pivot
-        Vector2 moveDirection = (GameObject.FindGameObjectWithTag("Pivot").transform.position - bulletPosition.transform.position).normalized;
-        // Áp dụng lực đẩy theo hướng của nòng súng
-        bulletRigidbody.AddForce(moveDirection * bulletForce, ForceMode2D.Force);
+            // Tính toán hướng di chuyển và khoảng cách dựa trên hai điểm pivot
+            Vector2 moveDirection = (GameObject.FindGameObjectWithTag("Pivot").transform.position - bulletPosition.transform.position).normalized;
+
+            // Áp dụng lực đẩy theo hướng của nòng súng
+            bulletRigidbody.AddForce(moveDirection * bulletForce, ForceMode2D.Force);
+        }
     }
 
     private void Update()

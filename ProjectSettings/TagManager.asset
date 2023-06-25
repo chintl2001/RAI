@@ -11,6 +11,7 @@ TagManager:
   - Rai
   - Bullet
   - Pivot
+  - BigRai
   layers:
   - Default
   - TransparentFX
