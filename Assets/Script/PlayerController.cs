@@ -86,8 +86,22 @@ public class PlayerController : MonoBehaviour, IDataPresistent
     {
         data.playerPosition= this.transform.position;
     }
+    public void OnJumpButtonClicked()
+    {
+        if (!isJumping)
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isJumping = true;
+        }
+    }
+
+    public void OnShootButtonClicked()
+    {
+            SoundManager.PlaySound("gunshot");
+            FireBullet();
     public void StopAnimation()
     {
         animator.enabled = false; // Disable the Animator component
+
     }
 }
