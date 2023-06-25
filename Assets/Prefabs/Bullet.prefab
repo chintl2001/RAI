@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2178820652092820330
 Animator:
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 5166634229659901394, guid: e9cee7ccba91ef04fbbc8633173c35a1, type: 3}
+  healthBar: {fileID: 0}
 --- !u!50 &4072349247998931186
 Rigidbody2D:
   serializedVersion: 4
