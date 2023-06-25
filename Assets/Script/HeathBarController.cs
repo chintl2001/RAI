@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class HeathBarController : MonoBehaviour
     {
         health = maxHealth;
         enemyCount = GameObject.FindGameObjectsWithTag("Rai").Length;
+        Debug.Log("Enemy Count: " + enemyCount);
         UpdateHealthUI();
     }
 

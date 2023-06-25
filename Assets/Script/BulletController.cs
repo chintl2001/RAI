@@ -5,10 +5,16 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public GameObject explosionPrefab;
+    private int raiCount; // Số lượng quái Rai còn lại
 
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        raiCount = GameObject.FindGameObjectsWithTag("Rai").Length; // Khởi tạo số lượng quái Rai
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -19,6 +25,17 @@ public class BulletController : MonoBehaviour
             Instantiate(explosionPrefab, collision.gameObject.transform.position, Quaternion.identity);
             gameObject.SetActive(false);
             collision.gameObject.SetActive(false);
+
+            raiCount--; // Giảm số lượng quái Rai còn lại
+
+            if (raiCount == 0)
+            {
+                SpawnController spawnController = FindObjectOfType<SpawnController>();
+                if (spawnController != null)
+                {
+                    spawnController.SpawnBoss(); // Sinh ra quái BigRai khi bắn hết quái Rai
+                }
+            }
         }
         else if (collision.gameObject.CompareTag("BigRai"))
         {
@@ -26,15 +43,6 @@ public class BulletController : MonoBehaviour
             if (healthBar != null)
             {
                 healthBar.DecreaseHealth(1f);
-            }
-
-            if (healthBar != null && healthBar.IsAllEnemiesDestroyed())
-            {
-                SpawnController spawnController = FindObjectOfType<SpawnController>();
-                if (spawnController != null)
-                {
-                    spawnController.SpawnBoss(); // Sinh ra quái tinh khi bắn hết số lượng quái
-                }
             }
         }
     }
