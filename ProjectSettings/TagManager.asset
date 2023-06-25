@@ -12,6 +12,8 @@ TagManager:
   - Bullet
   - Pivot
   - BigRai
+  - Fire
+  - Jump
   layers:
   - Default
   - TransparentFX
