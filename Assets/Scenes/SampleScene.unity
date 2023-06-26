@@ -2034,7 +2034,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1996297636}
+      - m_Target: {fileID: 8674303999446910531}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnJumpButtonClicked
         m_Mode: 1
@@ -2384,7 +2384,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1996297636}
+      - m_Target: {fileID: 8674303999446910531}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnShootButtonClicked
         m_Mode: 1
