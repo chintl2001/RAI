@@ -1103,7 +1103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &577521138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1365,7 +1365,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785733797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.14, y: -4.19, z: -10.060478}
+  m_LocalPosition: {x: 12.14, y: -4.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1388,7 +1388,7 @@ MonoBehaviour:
   playerTransform: {fileID: 5387241085468206085}
   distanceBetweenEnemies: 3
   numberOfEnemies: 10
-  yPosition: -3.321175
+  yPosition: -3.02
   bossSpawnController: {fileID: 463891625}
 --- !u!1 &807597094
 GameObject:
@@ -3968,6 +3968,8 @@ MonoBehaviour:
   bulletPool: {fileID: 0}
   bulletForce: 10
   bulletPosition: {fileID: 0}
+  animator: {fileID: 0}
+  flashEffect: {fileID: 0}
 --- !u!1 &2056556925
 GameObject:
   m_ObjectHideFlags: 0
@@ -4261,6 +4263,7 @@ GameObject:
   - component: {fileID: 8674303999446910530}
   - component: {fileID: 8674303999446910531}
   - component: {fileID: 8674303999446910532}
+  - component: {fileID: 8674303999446910533}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4543,6 +4546,8 @@ MonoBehaviour:
   bulletPool: {fileID: 856891762}
   bulletForce: 500
   bulletPosition: {fileID: 807597094}
+  animator: {fileID: 8674303999446910528}
+  flashEffect: {fileID: 8674303999446910533}
 --- !u!114 &8674303999446910532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4573,4 +4578,17 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
-  animator: {fileID: 8674303999446910528}
+--- !u!114 &8674303999446910533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871723922788599874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b508f8ec3b64de14ba32433af2e6b095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: e3017c8304602fb4a87d7c21aad05e6b, type: 2}
+  duration: 0.125

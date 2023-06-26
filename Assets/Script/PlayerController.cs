@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour, IDataPresistent
     public GameObject bulletPosition;
 
     public Animator animator;
+    [SerializeField] private SimpleFlash flashEffect;
 
     void Start()
     {
@@ -75,6 +76,13 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         {
             isJumping = false;
         }
+        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai"))
+        {
+            collision.gameObject.SetActive(false);
+            flashEffect.Flash();
+            FindObjectOfType<GameManager>().DecreaseDrone();
+        }
+
     }
 
     public void LoadData(GameData data)
@@ -97,11 +105,12 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     public void OnShootButtonClicked()
     {
-            SoundManager.PlaySound("gunshot");
-            FireBullet();
+        SoundManager.PlaySound("gunshot");
+        FireBullet();
+    }
     public void StopAnimation()
     {
-        animator.enabled = false; // Disable the Animator component
+        animator.enabled = false; 
 
     }
 }

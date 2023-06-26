@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour, IDataPresistent
@@ -10,11 +11,15 @@ public class GameManager : MonoBehaviour, IDataPresistent
     private int gold;
 
     public Text droneText;
-    private int drone;
+    private int drone = 3;
 
     public Text raiText;
     private int rai;
 
+    private void Start()
+    {
+        droneText.text = drone.ToString();
+    }
     public void IncreaseGold()
     {
         gold++;
@@ -25,6 +30,10 @@ public class GameManager : MonoBehaviour, IDataPresistent
     {
         drone--;
         droneText.text = drone.ToString();
+        if (drone <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
     public void IncreaseRai()
     {
@@ -35,14 +44,14 @@ public class GameManager : MonoBehaviour, IDataPresistent
     public void LoadData(GameData data)
     {
         this.gold = data.gold;
-        this.drone = data.hp;
+       // this.drone = data.hp;
         this.rai = data.enemyScore;
     }
 
     public void SaveData(ref GameData data)
     {
         data.gold = this.gold;
-        data.hp = this.drone;
+      //  data.hp = this.drone;
         data.enemyScore = this.rai;
     }
 }
