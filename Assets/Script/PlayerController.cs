@@ -17,6 +17,14 @@ public class PlayerController : MonoBehaviour, IDataPresistent
     public Animator animator;
     [SerializeField] private SimpleFlash flashEffect;
 
+    public int shotsFired = 0; // Số lượng đạn đã bắn
+    public int shotsPerReload = 5; // Số lượng đạn cần bắn trước khi nạp lại
+    public float reloadTime = 3f; // Thời gian nạp đạn (giây)
+    public GameObject reloadIndicator; // Chỉ báo nạp đạn
+
+    private bool isReloading = false; // Đang nạp đạn
+    private bool canShoot = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,6 +33,9 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     void FireBullet()
     {
+        if (isReloading || !canShoot)
+            return;
+
         // Lấy một viên đạn từ object pool
         GameObject bullet = bulletPool.GetPooledBullet();
 
@@ -41,7 +52,35 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
             // Áp dụng lực đẩy theo hướng của nòng súng
             bulletRigidbody.AddForce(moveDirection * bulletForce, ForceMode2D.Force);
+
+            shotsFired++;
+
+            if (shotsFired >= shotsPerReload)
+            {
+                StartCoroutine(Reload());
+            }
         }
+    }
+
+    private IEnumerator Reload()
+    {
+        isReloading = true;
+        canShoot = false;
+
+        // Hiển thị chỉ báo nạp đạn
+        reloadIndicator.SetActive(true);
+
+        yield return new WaitForSeconds(reloadTime);
+
+        // Nạp đạn xong
+        shotsFired = 0;
+
+        // Ẩn chỉ báo nạp đạn
+        reloadIndicator.SetActive(false);
+
+        isReloading = false;
+        canShoot = true;
+
     }
 
     private void Update()
@@ -67,8 +106,8 @@ public class PlayerController : MonoBehaviour, IDataPresistent
             SoundManager.PlaySound("gunshot");
             FireBullet();
         }
-
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

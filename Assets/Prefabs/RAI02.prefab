@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8045625179187518545}
   - component: {fileID: 8156566056496983355}
   - component: {fileID: 8104341675998880732}
+  - component: {fileID: 6883168481836602175}
+  - component: {fileID: -4538115707751786366}
   m_Layer: 0
   m_Name: RAI02
   m_TagString: BigRai
@@ -440,3 +442,30 @@ PolygonCollider2D:
       - {x: 1.5649999, y: -2.565}
       - {x: 1.485, y: -2.575}
   m_UseDelaunayMesh: 0
+--- !u!114 &6883168481836602175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273406021386683082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b508f8ec3b64de14ba32433af2e6b095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: e3017c8304602fb4a87d7c21aad05e6b, type: 2}
+  duration: 0.125
+--- !u!114 &-4538115707751786366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273406021386683082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084b7896ce9e42e4498758421512e05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashEffect: {fileID: 6883168481836602175}

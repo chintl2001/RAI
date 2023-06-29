@@ -122,7 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 5166634229659901394, guid: e9cee7ccba91ef04fbbc8633173c35a1, type: 3}
-  healthBar: {fileID: 0}
+  animator: {fileID: 0}
+  flashEffect: {fileID: 6883168481836602175, guid: 20483ee0ab05ff044b8b758ffbc2d371, type: 3}
 --- !u!50 &4072349247998931186
 Rigidbody2D:
   serializedVersion: 4
