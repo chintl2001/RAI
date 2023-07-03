@@ -44,14 +44,14 @@ public class GameManager : MonoBehaviour, IDataPresistent
     public void LoadData(GameData data)
     {
         this.gold = data.gold;
-       // this.drone = data.hp;
+        this.drone = data.hp;
         this.rai = data.enemyScore;
     }
 
     public void SaveData(ref GameData data)
     {
         data.gold = this.gold;
-      //  data.hp = this.drone;
+        data.hp = this.drone;
         data.enemyScore = this.rai;
     }
 }
