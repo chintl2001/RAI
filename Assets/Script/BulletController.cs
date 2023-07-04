@@ -5,9 +5,12 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public GameObject explosionPrefab;
+    public GameObject goldCoinPrefab;
+    public float goldCoinSpeed = 5f;
     private int raiCount; // Số lượng quái Rai còn lại
     private ParallaxController parallaxController;
     private PlayerController playerController;
+    public float goldCoinZ = -6f;
 
     private void OnBecameInvisible()
     {
@@ -33,6 +36,22 @@ public class BulletController : MonoBehaviour
             collision.gameObject.SetActive(false);
 
             raiCount--; // Giảm số lượng quái Rai còn lại
+
+            if (raiCount >= 1)
+            {
+                raiCount--; // Giảm số lượng quái Rai còn lại
+                SpawnController spawnController = FindObjectOfType<SpawnController>();
+                // Kiểm tra nếu spawnController không null
+                if (spawnController != null)
+                {
+
+                    // Tạo đồng vàng và di chuyển nó đến người chơi
+                    GameObject goldCoin = Instantiate(goldCoinPrefab, transform.position, Quaternion.identity);
+                    goldCoin.transform.position = new Vector3(goldCoin.transform.position.x, goldCoin.transform.position.y, goldCoinZ);
+                    Rigidbody2D goldCoinRigidbody = goldCoin.GetComponent<Rigidbody2D>();
+                }
+            }
+
 
             if (raiCount == 0)
             {
