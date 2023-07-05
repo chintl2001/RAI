@@ -1,5 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,13 +21,15 @@ public class GameManager : MonoBehaviour, IDataPresistent
     private void Start()
     {
         droneText.text = drone.ToString();
+        goldText.text = gold.ToString(); 
+        raiText.text = rai.ToString();
     }
     public void IncreaseGold()
     {
         gold++;
         goldText.text = gold.ToString();
     }
-    
+
     public void DecreaseDrone()
     {
         drone--;

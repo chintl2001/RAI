@@ -1,17 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/*using System.Collections.Generic;
 
-
-[Serializable]
-public class ScoreData 
+[System.Serializable]
+public class HighScoreData
 {
-    public List<Score> scores;
-
-    public ScoreData()
-    {
-        scores = new List<Score>();
-    }
-
+    public List<HighScoreEntry> highScores = new List<HighScoreEntry>();
 }
+
+[System.Serializable]
+public class HighScoreEntry
+{
+    public string playerName;
+    public int score;
+}*/
