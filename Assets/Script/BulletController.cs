@@ -37,23 +37,7 @@ public class BulletController : MonoBehaviour
 
             raiCount--; // Giảm số lượng quái Rai còn lại
 
-            if (raiCount >= 1)
-            {
-                raiCount--; // Giảm số lượng quái Rai còn lại
-                SpawnController spawnController = FindObjectOfType<SpawnController>();
-                // Kiểm tra nếu spawnController không null
-                if (spawnController != null)
-                {
-
-                    // Tạo đồng vàng và di chuyển nó đến người chơi
-                    GameObject goldCoin = Instantiate(goldCoinPrefab, transform.position, Quaternion.identity);
-                    goldCoin.transform.position = new Vector3(goldCoin.transform.position.x, goldCoin.transform.position.y, goldCoinZ);
-                    Rigidbody2D goldCoinRigidbody = goldCoin.GetComponent<Rigidbody2D>();
-                }
-            }
-
-
-            if (raiCount == 0)
+             if (raiCount == 0)
             {
                 SpawnController spawnController = FindObjectOfType<SpawnController>();
                 if (spawnController != null)
@@ -61,7 +45,48 @@ public class BulletController : MonoBehaviour
                     spawnController.SpawnBoss(); // Sinh ra quái BigRai khi bắn hết quái Rai
                     parallaxController.BossRaiAppeared(); // Gọi phương thức BossRaiAppeared() của ParallaxController
                     playerController.StopAnimation(); // Gọi phương thức StopAnimation() của PlayerController
+
+                    // Tạo vàng
+                    GameObject goldCoin = Instantiate(goldCoinPrefab, collision.transform.position, Quaternion.identity);
+
+                    // Random vị trí bay ra
+                    float randomX = Random.Range(-1f, 1f); // Phạm vi random theo trục X
+                    float randomY = Random.Range(0.5f, 1f); // Phạm vi random theo trục Y
+                    Vector2 randomDirection = new Vector2(randomX, randomY).normalized;
+
+                    // Đặt vận tốc nảy của vàng
+                    Rigidbody2D goldCoinRb = goldCoin.GetComponent<Rigidbody2D>();
+                    goldCoinRb.velocity = randomDirection * goldCoinSpeed;
+
+                    // Đặt vị trí Z của vàng để nằm trên các đối tượng khác
+                    Vector3 goldCoinPosition = goldCoin.transform.position;
+                    goldCoinPosition.z = goldCoinZ;
+                    goldCoin.transform.position = goldCoinPosition;
+
+                    FindObjectOfType<GameManager>().IncreaseGold();
                 }
+            }
+            else
+            {
+                // Tạo vàng
+                GameObject goldCoin = Instantiate(goldCoinPrefab, collision.transform.position, Quaternion.identity);
+
+                // Random vị trí bay ra
+                float randomX = Random.Range(-1f, 1f); // Phạm vi random theo trục X
+                float randomY = Random.Range(0.5f, 1f); // Phạm vi random theo trục Y
+                Vector2 randomDirection = new Vector2(randomX, randomY).normalized;
+
+                // Đặt vận tốc nảy của vàng
+                Rigidbody2D goldCoinRb = goldCoin.GetComponent<Rigidbody2D>();
+                goldCoinRb.velocity = randomDirection * goldCoinSpeed;
+
+                // Đặt vị trí Z của vàng để nằm trên các đối tượng khác
+                Vector3 goldCoinPosition = goldCoin.transform.position;
+                goldCoinPosition.z = goldCoinZ;
+                goldCoin.transform.position = goldCoinPosition;
+
+                FindObjectOfType<GameManager>().IncreaseGold();
+
             }
         }
         else if (collision.gameObject.CompareTag("BigRai"))

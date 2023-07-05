@@ -1,25 +1,44 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
+using System.IO;
 
 public class HighScoreManager : MonoBehaviour
 {
-    private void Start()
+    private string highScoresFilePath;
+    private HighScoreData highScoreData;
+
+    private void Awake()
     {
-        // Tạo dữ liệu cao nhất
-        HighScoreData highScore = new HighScoreData();
-        highScore.name = "John";
-        highScore.score = 100;
-
-        // Chuyển dữ liệu thành chuỗi JSON
-        string highScoreJson = JsonUtility.ToJson(highScore);
-
-        // Lưu trữ dữ liệu cao nhất dưới dạng chuỗi JSON
-        PlayerPrefs.SetString("HighScoreData", highScoreJson);
+        // Đường dẫn đến tệp highscores.json trong thư mục persistent data
+        highScoresFilePath = Path.Combine(Application.persistentDataPath, "highscores.json");
     }
 
-    [System.Serializable]
-    private class HighScoreData
+    public void SaveHighScores()
     {
-        public string name;
-        public int score;
+        string jsonData = JsonUtility.ToJson(highScoreData);
+        File.WriteAllText(highScoresFilePath, jsonData);
+    }
+
+    public void x1()
+    {
+        if (File.Exists(highScoresFilePath))
+        {
+            string jsonData = File.ReadAllText(highScoresFilePath);
+            highScoreData = JsonUtility.FromJson<HighScoreData>(jsonData);
+        }
+        else
+        {
+            // Tạo dữ liệu mặc định nếu không có tệp highscores.json
+            highScoreData = new HighScoreData();
+        }
+    }
+
+    public void AddHighScore(string playerName, int score)
+    {
+        HighScoreEntry entry = new HighScoreEntry();
+        entry.playerName = playerName;
+        entry.score = score;
+        highScoreData.highScores.Add(entry);
+        SaveHighScores();
     }
 }
+*/

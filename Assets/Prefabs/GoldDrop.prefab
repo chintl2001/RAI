@@ -172,9 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5494ab46b5241342b3f192d07d9a394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTag: Player
-  moveSpeed: 5
-  coinCollectSound: {fileID: 8300000, guid: 1e4d3caa01280dd429c3a704cdca7d39, type: 3}
 --- !u!82 &-1978364888213882872
 AudioSource:
   m_ObjectHideFlags: 0
@@ -185,7 +182,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1e4d3caa01280dd429c3a704cdca7d39, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
