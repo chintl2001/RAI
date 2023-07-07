@@ -103,7 +103,11 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SoundManager.PlaySound("gunshot");
+            if (!isReloading)
+            {
+                SoundManager.PlaySound("gunshot");
+
+            }
             FireBullet();
         }
     }
