@@ -418,9 +418,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 542402784}
-        m_TargetAssemblyTypeName: PauseOptions, Assembly-CSharp
-        m_MethodName: ExitGame
+      - m_Target: {fileID: 542402785}
+        m_TargetAssemblyTypeName: MenuGameOver, Assembly-CSharp
+        m_MethodName: OnApplicationQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
