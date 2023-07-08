@@ -1,44 +1,34 @@
-﻿/*using UnityEngine;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
-public class HighScoreManager : MonoBehaviour
+public class HighScoreDataManager
 {
-    private string highScoresFilePath;
-    private HighScoreData highScoreData;
+    private string filePath;
 
-    private void Awake()
+    public HighScoreDataManager(string filePath)
     {
-        // Đường dẫn đến tệp highscores.json trong thư mục persistent data
-        highScoresFilePath = Path.Combine(Application.persistentDataPath, "highscores.json");
+        this.filePath = filePath;
     }
 
-    public void SaveHighScores()
+    public int LoadHighScore()
     {
-        string jsonData = JsonUtility.ToJson(highScoreData);
-        File.WriteAllText(highScoresFilePath, jsonData);
-    }
-
-    public void x1()
-    {
-        if (File.Exists(highScoresFilePath))
+        if (File.Exists(filePath))
         {
-            string jsonData = File.ReadAllText(highScoresFilePath);
-            highScoreData = JsonUtility.FromJson<HighScoreData>(jsonData);
+            string json = File.ReadAllText(filePath);
+            HighScoreData data = JsonUtility.FromJson<HighScoreData>(json);
+            return data.highScore;
         }
         else
         {
-            // Tạo dữ liệu mặc định nếu không có tệp highscores.json
-            highScoreData = new HighScoreData();
+            return 0;
         }
     }
 
-    public void AddHighScore(string playerName, int score)
+    public void SaveHighScore(int highScore)
     {
-        HighScoreEntry entry = new HighScoreEntry();
-        entry.playerName = playerName;
-        entry.score = score;
-        highScoreData.highScores.Add(entry);
-        SaveHighScores();
+        HighScoreData data = new HighScoreData();
+        data.highScore = highScore;
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(filePath, json);
     }
 }
-*/
