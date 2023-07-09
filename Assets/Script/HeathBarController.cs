@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HeathBarController : MonoBehaviour
@@ -25,11 +24,6 @@ public class HeathBarController : MonoBehaviour
         if (health <= 0)
         {
             DestroyEnemy();
-        }
-        if(health == 0)
-        {
-            GameManager.Instance.IncreaseGold5();
-            SceneManager.LoadScene("Upgrade");
         }
     }
 
