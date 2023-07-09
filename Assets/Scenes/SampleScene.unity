@@ -1180,7 +1180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &570748052
 Transform:
   m_ObjectHideFlags: 0
@@ -1211,8 +1211,8 @@ MonoBehaviour:
   objectPool: {fileID: 1861664913}
   playerTransform: {fileID: 5387241085468206085}
   minDistanceBetweenEnemies: 3
-  maxDistanceBetweenEnemies: 20
-  totalNumberOfEnemies: 10
+  maxDistanceBetweenEnemies: 10
+  totalNumberOfEnemies: 5
   yPosition: -0.38
   bossSpawnController: {fileID: 463891625}
 --- !u!1 &577521137
@@ -3853,7 +3853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5095447209993032760, guid: 6496865c1dc537e4aa1f6f1d838e9ae6, type: 3}
-  poolSize: 10
+  poolSize: 5
 --- !u!4 &1861664914
 Transform:
   m_ObjectHideFlags: 0
@@ -4290,7 +4290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1996297630
 GameObject:
   m_ObjectHideFlags: 0
