@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     }
     public void DecreaseGold()
     {
-        gold -= 20;
+        gold -= 30;
         goldText.text = gold.ToString();
     }
 
