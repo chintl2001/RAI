@@ -26,7 +26,7 @@ public class BossController : MonoBehaviour
             Vector3 targetPosition = new Vector3(targetX, targetY, transform.position.z);
             Vector3 direction = (targetPosition - transform.position).normalized;
             Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
-            bulletRigidbody.velocity = direction * bulletSpeed;
+            bulletRigidbody.AddForce(direction * bulletSpeed, ForceMode2D.Impulse);
         }
     }
 }

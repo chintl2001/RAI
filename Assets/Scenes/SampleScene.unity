@@ -1583,7 +1583,7 @@ MonoBehaviour:
   playerTransform: {fileID: 5387241085468206085}
   minDistanceBetweenEnemies: 1
   maxDistanceBetweenEnemies: 5
-  totalNumberOfEnemies: 10
+  totalNumberOfEnemies: 3
   yPosition: -3.02
   bossSpawnController: {fileID: 463891625}
 --- !u!1 &807597094
