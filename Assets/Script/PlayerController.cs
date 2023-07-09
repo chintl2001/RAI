@@ -103,7 +103,11 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SoundManager.PlaySound("gunshot");
+            if (!isReloading)
+            {
+                SoundManager.PlaySound("gunshot");
+
+            }
             FireBullet();
         }
     }
@@ -115,7 +119,7 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         {
             isJumping = false;
         }
-        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai"))
+        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai") || collision.gameObject.CompareTag("bossbullet"))
         {
             collision.gameObject.SetActive(false);
             flashEffect.Flash();
