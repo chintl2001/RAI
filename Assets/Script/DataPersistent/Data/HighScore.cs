@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class HighScore
 {
-    public int highScore;
+    public string playerName;
+    public int score;
 
-    public HighScore()
+    public HighScore(string playerName, int score)
     {
-        this.highScore = 0;
+        this.playerName = playerName;
+        this.score = score;
     }
 }
