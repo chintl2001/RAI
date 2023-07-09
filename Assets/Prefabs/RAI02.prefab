@@ -486,8 +486,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7425595468528286811, guid: 34bc08f49a023974c95e69c12a44129c, type: 3}
   targetX: -7.27
   targetY: -3.91
-  bulletSpeed: 10
-  fireInterval: 3
+  bulletSpeed: 30
+  fireInterval: 1
 --- !u!1 &5597265512516553243
 GameObject:
   m_ObjectHideFlags: 0
