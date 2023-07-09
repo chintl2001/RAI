@@ -1,26 +1,34 @@
+﻿using System.IO;
 using UnityEngine;
 
-public class HighScoreManager : MonoBehaviour
+public class HighScoreDataManager
 {
-    private static HighScoreManager instance;
+    private string filePath;
 
-    public HighScoreList highScoreList;
-
-    private void Awake()
+    public HighScoreDataManager(string filePath)
     {
-        if (instance == null)
+        this.filePath = filePath;
+    }
+
+    public int LoadHighScore()
+    {
+        if (File.Exists(filePath))
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            string json = File.ReadAllText(filePath);
+            HighScoreData data = JsonUtility.FromJson<HighScoreData>(json);
+            return data.highScore;
         }
         else
         {
-            Destroy(gameObject);
+            return 0;
         }
     }
 
-    public static HighScoreManager Instance
+    public void SaveHighScore(int highScore)
     {
-        get { return instance; }
+        HighScoreData data = new HighScoreData();
+        data.highScore = highScore;
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(filePath, json);
     }
 }

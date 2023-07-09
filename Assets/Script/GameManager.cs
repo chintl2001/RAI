@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System;
 
 
 public class GameManager : MonoBehaviour, IDataPresistent
 {
     public Text goldText;
-    private int gold { get; set; }
+    private int gold;
 
     public Text droneText;
     private int drone = 3;
@@ -24,53 +22,17 @@ public class GameManager : MonoBehaviour, IDataPresistent
 
     private HighScore highScore;
 
-    private HighScoreList _highScoreList;
-    public static GameManager Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
-    public HighScoreList GetHighScoreList()
-    {
-        return _highScoreList;
-    }
-
-    public void SetHighScoreList(HighScoreList highScoreList)
-    {
-        _highScoreList = highScoreList;
-    }
-
     private void Start()
     {
         droneText.text = drone.ToString();
-        goldText.text = gold.ToString();
+        goldText.text = gold.ToString(); 
         raiText.text = rai.ToString();
-        LoadHighScoreList();
+        // Load high score từ lưu trữ
+        LoadHighScore();
     }
-
     public void IncreaseGold()
     {
         gold++;
-        goldText.text = gold.ToString();
-    }
-    public void IncreaseGold5()
-    {
-        gold +=5;
-        goldText.text = gold.ToString();
-    }
-    public void DecreaseGold()
-    {
-        gold -= 30;
         goldText.text = gold.ToString();
     }
 
@@ -80,40 +42,19 @@ public class GameManager : MonoBehaviour, IDataPresistent
         droneText.text = drone.ToString();
         if (drone <= 0)
         {
-            if (_highScoreList.highScores.Any())
+            if (rai > highScore.highScore)
             {
-                int maxScore = _highScoreList.highScores.Max(hs => hs.score);
-                if (rai > maxScore)
-                {
-                    string playerName = GenerateRandomName();
-                    HighScore newHighScore = new HighScore(playerName, rai);
-                    _highScoreList.highScores.Add(newHighScore);
-                    SaveHighScoreList();
-                }
+                highScore.highScore = rai;
+                SaveHighScore();
             }
-            else
-            {
-                string playerName = GenerateRandomName();
-                HighScore newHighScore = new HighScore(playerName, rai);
-                _highScoreList.highScores.Add(newHighScore);
-                SaveHighScoreList();
-            }
-
             SceneManager.LoadScene("GameOver");
         }
     }
-
-
     public void IncreaseRai()
     {
         rai++;
         raiText.text = rai.ToString();
-    }
-
-    public void IncreaseScore()
-    {
-        drone++;
-        droneText.text = drone.ToString();
+       
     }
 
     public void LoadData(GameData data)
@@ -130,42 +71,36 @@ public class GameManager : MonoBehaviour, IDataPresistent
         data.enemyScore = this.rai;
     }
 
-    private void LoadHighScoreList()
+    private void LoadHighScore()
     {
+        // Kiểm tra xem tệp JSON high score có tồn tại không
         if (File.Exists(GetHighScoreFilePath()))
         {
+            // Đọc tệp JSON và chuyển đổi thành đối tượng HighScore
             string json = File.ReadAllText(GetHighScoreFilePath());
-            _highScoreList = JsonUtility.FromJson<HighScoreList>(json);
+            highScore = JsonUtility.FromJson<HighScore>(json);
         }
         else
         {
-            _highScoreList = new HighScoreList();
+            // Nếu không có tệp JSON, tạo một đối tượng HighScore mới với giá trị mặc định
+            highScore = new HighScore();
+            highScore.highScore = 0;
         }
     }
 
-    private void SaveHighScoreList()
+    private void SaveHighScore()
     {
-        string json = JsonUtility.ToJson(_highScoreList);
+        // Chuyển đổi đối tượng HighScore thành chuỗi JSON
+        string json = JsonUtility.ToJson(highScore);
+
+        // Lưu chuỗi JSON vào tệp
         File.WriteAllText(GetHighScoreFilePath(), json);
     }
 
     private string GetHighScoreFilePath()
     {
+        // Đường dẫn tới tệp JSON lưu trữ high score
         return Application.persistentDataPath + "/highscore.json";
     }
-
-    private string GenerateRandomName()
-    {
-        int nameLength = 6; // Độ dài của tên ngẫu nhiên
-        string allowedCharacters = "abcdefghijklmnopqrstuvwxyz0123456789"; // Các ký tự cho phép trong tên ngẫu nhiên
-        System.Random random = new System.Random();
-
-        StringBuilder stringBuilder = new StringBuilder(nameLength);
-        for (int i = 0; i < nameLength; i++)
-        {
-            stringBuilder.Append(allowedCharacters[random.Next(0, allowedCharacters.Length)]);
-        }
-
-        return stringBuilder.ToString();
-    }
 }
+
