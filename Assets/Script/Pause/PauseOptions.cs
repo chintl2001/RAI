@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 public class PauseOptions : MonoBehaviour
 {
     public GameObject PauseScreen;
-
+    public static PauseOptions Instance { get; private set; }
     bool GamePaused;
 
     // Start is called before the first frame update
     void Start()
     {
+
         GamePaused = false;
     }
 

@@ -135,7 +135,10 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     public void SaveData(ref GameData data)
     {
-        data.playerPosition= this.transform.position;
+        if (this != null)
+        {
+            data.playerPosition = new Vector2(-7f, -3.321175f);
+        }
     }
     public void OnJumpButtonClicked()
     {

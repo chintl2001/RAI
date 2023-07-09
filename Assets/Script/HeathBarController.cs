@@ -28,6 +28,7 @@ public class HeathBarController : MonoBehaviour
         }
         if(health == 0)
         {
+            GameManager.Instance.IncreaseGold5();
             SceneManager.LoadScene("Upgrade");
         }
     }

@@ -14,7 +14,7 @@ using System;
 public class GameManager : MonoBehaviour, IDataPresistent
 {
     public Text goldText;
-    private int gold;
+    private int gold { get; set; }
 
     public Text droneText;
     private int drone = 3;
@@ -63,6 +63,16 @@ public class GameManager : MonoBehaviour, IDataPresistent
         gold++;
         goldText.text = gold.ToString();
     }
+    public void IncreaseGold5()
+    {
+        gold +=5;
+        goldText.text = gold.ToString();
+    }
+    public void DecreaseGold()
+    {
+        gold -= 20;
+        goldText.text = gold.ToString();
+    }
 
     public void DecreaseDrone()
     {
@@ -98,6 +108,12 @@ public class GameManager : MonoBehaviour, IDataPresistent
     {
         rai++;
         raiText.text = rai.ToString();
+    }
+
+    public void IncreaseScore()
+    {
+        drone++;
+        droneText.text = drone.ToString();
     }
 
     public void LoadData(GameData data)
