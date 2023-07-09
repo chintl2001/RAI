@@ -143,6 +143,8 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isJumping = true;
+            SoundManager.PlaySound("jumping");
+
         }
     }
 
@@ -151,9 +153,9 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         SoundManager.PlaySound("gunshot");
         FireBullet();
     }
-    public void StopAnimation()
+    /*public void StopAnimation()
     {
         animator.enabled = false; 
 
-    }
+    }*/
 }
