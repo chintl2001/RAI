@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 
 public class GameManager : MonoBehaviour, IDataPresistent
@@ -22,14 +24,40 @@ public class GameManager : MonoBehaviour, IDataPresistent
 
     private HighScore highScore;
 
+    private HighScoreList _highScoreList;
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    public HighScoreList GetHighScoreList()
+    {
+        return _highScoreList;
+    }
+
+    public void SetHighScoreList(HighScoreList highScoreList)
+    {
+        _highScoreList = highScoreList;
+    }
+
     private void Start()
     {
         droneText.text = drone.ToString();
-        goldText.text = gold.ToString(); 
+        goldText.text = gold.ToString();
         raiText.text = rai.ToString();
-        // Load high score từ lưu trữ
-        LoadHighScore();
+        LoadHighScoreList();
     }
+
     public void IncreaseGold()
     {
         gold++;
@@ -42,19 +70,34 @@ public class GameManager : MonoBehaviour, IDataPresistent
         droneText.text = drone.ToString();
         if (drone <= 0)
         {
-            if (rai > highScore.highScore)
+            if (_highScoreList.highScores.Any())
             {
-                highScore.highScore = rai;
-                SaveHighScore();
+                int maxScore = _highScoreList.highScores.Max(hs => hs.score);
+                if (rai > maxScore)
+                {
+                    string playerName = GenerateRandomName();
+                    HighScore newHighScore = new HighScore(playerName, rai);
+                    _highScoreList.highScores.Add(newHighScore);
+                    SaveHighScoreList();
+                }
             }
+            else
+            {
+                string playerName = GenerateRandomName();
+                HighScore newHighScore = new HighScore(playerName, rai);
+                _highScoreList.highScores.Add(newHighScore);
+                SaveHighScoreList();
+            }
+
             SceneManager.LoadScene("GameOver");
         }
     }
+
+
     public void IncreaseRai()
     {
         rai++;
         raiText.text = rai.ToString();
-       
     }
 
     public void LoadData(GameData data)
@@ -71,36 +114,42 @@ public class GameManager : MonoBehaviour, IDataPresistent
         data.enemyScore = this.rai;
     }
 
-    private void LoadHighScore()
+    private void LoadHighScoreList()
     {
-        // Kiểm tra xem tệp JSON high score có tồn tại không
         if (File.Exists(GetHighScoreFilePath()))
         {
-            // Đọc tệp JSON và chuyển đổi thành đối tượng HighScore
             string json = File.ReadAllText(GetHighScoreFilePath());
-            highScore = JsonUtility.FromJson<HighScore>(json);
+            _highScoreList = JsonUtility.FromJson<HighScoreList>(json);
         }
         else
         {
-            // Nếu không có tệp JSON, tạo một đối tượng HighScore mới với giá trị mặc định
-            highScore = new HighScore();
-            highScore.highScore = 0;
+            _highScoreList = new HighScoreList();
         }
     }
 
-    private void SaveHighScore()
+    private void SaveHighScoreList()
     {
-        // Chuyển đổi đối tượng HighScore thành chuỗi JSON
-        string json = JsonUtility.ToJson(highScore);
-
-        // Lưu chuỗi JSON vào tệp
+        string json = JsonUtility.ToJson(_highScoreList);
         File.WriteAllText(GetHighScoreFilePath(), json);
     }
 
     private string GetHighScoreFilePath()
     {
-        // Đường dẫn tới tệp JSON lưu trữ high score
         return Application.persistentDataPath + "/highscore.json";
     }
-}
 
+    private string GenerateRandomName()
+    {
+        int nameLength = 6; // Độ dài của tên ngẫu nhiên
+        string allowedCharacters = "abcdefghijklmnopqrstuvwxyz0123456789"; // Các ký tự cho phép trong tên ngẫu nhiên
+        System.Random random = new System.Random();
+
+        StringBuilder stringBuilder = new StringBuilder(nameLength);
+        for (int i = 0; i < nameLength; i++)
+        {
+            stringBuilder.Append(allowedCharacters[random.Next(0, allowedCharacters.Length)]);
+        }
+
+        return stringBuilder.ToString();
+    }
+}
