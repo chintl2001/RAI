@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         {
             isJumping = false;
         }
-        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai"))
+        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai") || collision.gameObject.CompareTag("bossbullet"))
         {
             collision.gameObject.SetActive(false);
             flashEffect.Flash();

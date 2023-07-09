@@ -4,31 +4,29 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public BulletPooling bulletPool; // Tham chiếu đến lớp BulletPooling
-    public GameObject player; // Tham chiếu đến prefab player
-    public float fireInterval = 3f; // Thời gian giữa các lần bắn
-    private float nextFireTime;
-    private float bulletSpeed = 100f;
+    public GameObject bulletPrefab; // Prefab của đạn
+    public float targetX = -7.27f; // Vị trí x của mục tiêu
+    public float targetY = -3.91f; // Vị trí y của mục tiêu
+    public float bulletSpeed = 10f; // Tốc độ của đạn
+    public float fireInterval = 3f; // Khoảng thời gian giữa các lần bắn
 
     private void Start()
     {
-        bulletPool = FindObjectOfType<BulletPooling>();
-        // Các xử lý khác...
-    }
-    private void Update()
-    {
-        if (Time.time >= nextFireTime)
-        {
-            FireBullet();
-            nextFireTime = Time.time + fireInterval;
-        }
+        StartCoroutine(ShootBullets());
     }
 
-    private void FireBullet()
+    private IEnumerator ShootBullets()
     {
-        GameObject bullet = bulletPool.GetPooledBullet(); // Lấy đối tượng đạn từ pool
-        bullet.transform.position = transform.position;
-        Vector3 playerDirection = (player.transform.position - transform.position).normalized;
-        bullet.GetComponent<Rigidbody2D>().velocity = playerDirection * bulletSpeed;
+        while (true)
+        {
+            yield return new WaitForSeconds(fireInterval);
+
+            // Tạo đạn và thiết lập hướng di chuyển
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Vector3 targetPosition = new Vector3(targetX, targetY, transform.position.z);
+            Vector3 direction = (targetPosition - transform.position).normalized;
+            Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
+            bulletRigidbody.velocity = direction * bulletSpeed;
+        }
     }
 }

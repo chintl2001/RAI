@@ -15,6 +15,7 @@ TagManager:
   - Fire
   - Jump
   - GoldCoin
+  - bossbullet
   layers:
   - Default
   - TransparentFX
