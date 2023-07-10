@@ -14,7 +14,7 @@ using System;
 public class GameManager : MonoBehaviour, IDataPresistent
 {
     public Text goldText;
-    private int gold { get; set; }
+    private int gold;
 
     public Text droneText;
     private int drone = 3;
@@ -29,16 +29,17 @@ public class GameManager : MonoBehaviour, IDataPresistent
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
 
     public HighScoreList GetHighScoreList()
     {
@@ -65,12 +66,12 @@ public class GameManager : MonoBehaviour, IDataPresistent
     }
     public void IncreaseGold5()
     {
-        gold +=5;
+        gold+=5;
         goldText.text = gold.ToString();
     }
     public void DecreaseGold()
     {
-        gold -= 30;
+        gold -= 20;
         goldText.text = gold.ToString();
     }
 
@@ -110,7 +111,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
         raiText.text = rai.ToString();
     }
 
-    public void IncreaseScore()
+    public void IncreaseDrone()
     {
         drone++;
         droneText.text = drone.ToString();

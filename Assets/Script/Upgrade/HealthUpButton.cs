@@ -20,7 +20,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
             DataPresistent.instance.LoadGame();
             return;
         }
-        GameManager.Instance.IncreaseScore();
+        GameManager.Instance.IncreaseDrone();
         SceneManager.LoadScene("SampleScene");
     }
     public void DecreaseGold()
