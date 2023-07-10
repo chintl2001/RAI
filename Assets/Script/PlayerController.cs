@@ -103,11 +103,7 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!isReloading)
-            {
-                SoundManager.PlaySound("gunshot");
-
-            }
+            SoundManager.PlaySound("gunshot");
             FireBullet();
         }
     }
@@ -119,7 +115,7 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         {
             isJumping = false;
         }
-        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai") || collision.gameObject.CompareTag("bossbullet"))
+        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai"))
         {
             collision.gameObject.SetActive(false);
             flashEffect.Flash();
@@ -135,10 +131,7 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     public void SaveData(ref GameData data)
     {
-        if (this != null)
-        {
-            data.playerPosition = new Vector2(-7f, -3.321175f);
-        }
+        data.playerPosition= this.transform.position;
     }
     public void OnJumpButtonClicked()
     {
@@ -146,8 +139,6 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isJumping = true;
-            SoundManager.PlaySound("jumping");
-
         }
     }
 
@@ -156,9 +147,9 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         SoundManager.PlaySound("gunshot");
         FireBullet();
     }
-    /*public void StopAnimation()
+    public void StopAnimation()
     {
         animator.enabled = false; 
 
-    }*/
+    }
 }
