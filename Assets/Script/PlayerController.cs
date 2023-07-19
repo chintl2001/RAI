@@ -147,9 +147,9 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         SoundManager.PlaySound("gunshot");
         FireBullet();
     }
-    public void StopAnimation()
+    /*public void StopAnimation()
     {
         animator.enabled = false; 
 
-    }
+    }*/
 }

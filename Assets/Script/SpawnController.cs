@@ -1,47 +1,115 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpawnController : MonoBehaviour
+public class SpawnController : MonoBehaviour, IDataPresistent
 {
     public ObjectPooling objectPool;
-    public Transform playerTransform; // Transform của player
-    public float minDistanceBetweenEnemies = 3f; // Khoảng cách tối thiểu giữa các quái
-    public float maxDistanceBetweenEnemies = 10f; // Khoảng cách tối đa giữa các quái
-    public int totalNumberOfEnemies = 10; // Tổng số lượng quái cần spawn
+    public GameObject enemyPrefab;
+    public Transform playerTransform;
+    public float minDistanceBetweenEnemies = 3f;
+    public float maxDistanceBetweenEnemies = 10f;
+    public int totalNumberOfEnemies = 10;
     public float yPosition = -3.321175f;
     public SpawnBossController bossSpawnController;
+    public static SpawnController instance;
+    private bool hasSpawnedEnemies = false;
 
+    private bool isInitialSpawnComplete = false;
+
+    private List<Vector3> enemyPositions = new List<Vector3>();
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        if (!hasSpawnedEnemies)
+        {
+            SpawnEnemies();
+            hasSpawnedEnemies = true;
+        }
+    }
 
     private void Start()
-    {
-        int remainingEnemies = totalNumberOfEnemies;
-        float currentPosition = 0f;
-        List<float> distances = GenerateRandomDistances(remainingEnemies, minDistanceBetweenEnemies, maxDistanceBetweenEnemies);
-
-        while (remainingEnemies > 0)
+    {/*
+        if (!isInitialSpawnComplete && !hasSpawnedEnemies)
         {
-            // Random số lượng quái từ 1 đến số quái còn lại
-            int numberOfEnemies = Mathf.Min(Random.Range(1, remainingEnemies + 1), remainingEnemies);
+            SpawnEnemies();
+            isInitialSpawnComplete = true;
+        }*/
+    }
 
-            float distance = distances[numberOfEnemies - 1];
+    private void SpawnEnemies()
+    {
+        // Determine if there is saved data
+        GameData savedData = LoadSavedGameData();
 
-            List<Transform> spawnPositions = GenerateRandomSpawnPositions(numberOfEnemies, currentPosition, distance);
-
-            for (int i = 0; i < numberOfEnemies; i++)
-            {
-                Transform spawnPosition = spawnPositions[i];
-
-                GameObject prefab = objectPool.GetPooledObject();
-                prefab.transform.position = spawnPosition.position;
-                prefab.SetActive(true);
-
-                // Cập nhật vị trí hiện tại cho quái tiếp theo
-                currentPosition += distance;
-            }
-
-            remainingEnemies -= numberOfEnemies;
+        if (savedData != null && savedData.enemyPositions != null)
+        {
+            // If there is saved data, spawn enemies from the data
+            SpawnEnemiesFromData(savedData);
         }
+        else if (!hasSpawnedEnemies) // Only spawn if not spawned before
+        {
+            SpawnInitialEnemies();
+            hasSpawnedEnemies = true; // Mark as spawned
+        }
+    }
+
+    private GameData LoadSavedGameData()
+    {
+        // Read saved data from PlayerPrefs or other file
+        string savedDataString = PlayerPrefs.GetString("GameData");
+
+        // Convert the saved string to GameData object
+        GameData savedData = JsonUtility.FromJson<GameData>(savedDataString);
+
+        return savedData;
+    }
+
+    private void SpawnEnemiesFromData(GameData data)
+    {
+        foreach (Vector3 enemyPosition in data.enemyPositions)
+        {
+            GameObject prefab = objectPool.GetPooledObject();
+            prefab.transform.position = enemyPosition;
+            prefab.SetActive(true);
+        }
+
+        hasSpawnedEnemies = true; // Mark as spawned from data
+    }
+
+    private void SpawnInitialEnemies()
+    {
+        // Spawn initial enemies
+        float currentPosition = 0f;
+        List<float> distances = GenerateRandomDistances(totalNumberOfEnemies, minDistanceBetweenEnemies, maxDistanceBetweenEnemies);
+
+        for (int i = 0; i < totalNumberOfEnemies; i++)
+        {
+            Vector3 spawnPosition = new Vector3(currentPosition, yPosition, 0f);
+
+            GameObject prefab = objectPool.GetPooledObject();
+            prefab.transform.position = spawnPosition;
+            prefab.SetActive(true);
+
+            enemyPositions.Add(spawnPosition);
+
+            // Update current position for the next enemy
+            currentPosition += distances[i];
+        }
+    }
+
+    public void ResetSpawnState()
+    {
+        hasSpawnedEnemies = false;
     }
 
     private List<float> GenerateRandomDistances(int numberOfDistances, float minDistance, float maxDistance)
@@ -57,26 +125,52 @@ public class SpawnController : MonoBehaviour
         return distances;
     }
 
-    private List<Transform> GenerateRandomSpawnPositions(int numberOfPositions, float startPosition, float distance)
-    {
-        List<Transform> spawnPositions = new List<Transform>();
-
-        for (int i = 0; i < numberOfPositions; i++)
-        {
-            // Tạo một GameObject tạm để lưu trữ vị trí spawn
-            GameObject spawnPositionObject = new GameObject("SpawnPosition");
-            spawnPositionObject.transform.position = new Vector3(startPosition + i * distance, yPosition, 0f);
-            spawnPositions.Add(spawnPositionObject.transform);
-        }
-
-        return spawnPositions;
-    }
-
     public void SpawnBoss()
     {
         if (bossSpawnController != null)
         {
             bossSpawnController.SpawnBoss();
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        // Check if there are enemy positions in the GameData object
+        if (data != null && data.enemyPositions != null)
+        {
+            // Clear all previously spawned enemies
+            List<GameObject> spawnedEnemies = objectPool.GetSpawnedObjects();
+            foreach (GameObject enemy in spawnedEnemies)
+            {
+                objectPool.ReturnToPool(enemy);
+            }
+
+            // Spawn enemies from the position list in the GameData object
+            foreach (Vector3 enemyPosition in data.enemyPositions)
+            {
+                GameObject prefab = objectPool.GetPooledObject();
+                prefab.transform.position = enemyPosition;
+                prefab.SetActive(true);
+            }
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        // Create a new GameData object if it doesn't exist
+        if (data == null)
+        {
+            data = new GameData();
+        }
+
+        // Clear the enemy position list in the GameData to store new data
+        data.enemyPositions.Clear();
+
+        // Iterate over all spawned enemies and store their positions in the GameData object
+        List<GameObject> spawnedEnemies = objectPool.GetSpawnedObjects();
+        foreach (GameObject enemy in spawnedEnemies)
+        {
+            data.enemyPositions.Add(enemy.transform.position);
         }
     }
 }
