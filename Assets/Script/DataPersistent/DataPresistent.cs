@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class DataPresistent : MonoBehaviour
 {
@@ -30,8 +31,8 @@ public class DataPresistent : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-
     }
+    
 
     public void OnEnable()
     {

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     private HighScoreList _highScoreList;
     public static GameManager Instance { get; private set; }
 
-    private void Awake()
+    /*private void Awake()
     {
         if (Instance == null)
         {
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
         {
             Destroy(gameObject);
         }
-    }
+    }*/
 
 
     public HighScoreList GetHighScoreList()
