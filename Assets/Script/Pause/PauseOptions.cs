@@ -47,7 +47,7 @@ public class PauseOptions : MonoBehaviour
 
     public void ExitGame()
     {
-        SpawnController.instance.ResetSpawnState(); // Đặt lại trạng thái spawn
+       // SpawnController.instance.ResetSpawnState(); // Đặt lại trạng thái spawn
         SceneManager.LoadScene("Start");
     }
 }

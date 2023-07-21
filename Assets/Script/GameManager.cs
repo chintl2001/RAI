@@ -38,19 +38,6 @@ public class GameManager : MonoBehaviour, IDataPresistent
     //    }
     //}
 
-    /*private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }*/
-
 
 
     public HighScoreList GetHighScoreList()
@@ -66,7 +53,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     private void Start()
     {
         droneText.text = drone.ToString();
-        goldText.text = gold.ToString(); 
+        goldText.text = gold.ToString();
         raiText.text = rai.ToString();
         // Load high score từ lưu trữ
         LoadHighScore();
@@ -78,7 +65,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     }
     public void IncreaseGold5()
     {
-        gold+=5;
+        gold += 5;
         goldText.text = gold.ToString();
     }
     public void DecreaseGold()
