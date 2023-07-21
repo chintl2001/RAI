@@ -151,9 +151,17 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         }
         
     }
+
     //public void StopAnimation()
     //{
     //    animator.enabled = false; 
 
     //}
+
+    /*public void StopAnimation()
+    {
+        animator.enabled = false; 
+
+    }*/
+
 }

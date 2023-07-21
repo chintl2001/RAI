@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,6 +47,7 @@ public class PauseOptions : MonoBehaviour
 
     public void ExitGame()
     {
+        SpawnController.instance.ResetSpawnState(); // Đặt lại trạng thái spawn
         SceneManager.LoadScene("Start");
     }
 }

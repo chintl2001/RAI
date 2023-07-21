@@ -94,7 +94,10 @@ public class BulletController : MonoBehaviour
             gameObject.SetActive(false);
             FindObjectOfType<HeathBarController>().DecreaseHealth(1f);
             parallaxController.BossRaiAppeared(); // Gọi phương thức BossRaiAppeared() của ParallaxController
+
            // playerController.StopAnimation(); // Gọi phương thức StopAnimation() của PlayerController
+            //playerController.StopAnimation(); // Gọi phương thức StopAnimation() của PlayerController
+
         }
     }
 }

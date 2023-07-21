@@ -38,6 +38,20 @@ public class GameManager : MonoBehaviour, IDataPresistent
     //    }
     //}
 
+    /*private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }*/
+
+
 
     public HighScoreList GetHighScoreList()
     {
