@@ -1215,6 +1215,7 @@ MonoBehaviour:
   totalNumberOfEnemies: 10
   yPosition: -0.38
   bossSpawnController: {fileID: 463891625}
+  bossPrefab: {fileID: 0}
 --- !u!1 &577521137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,6 +1521,7 @@ MonoBehaviour:
   totalNumberOfEnemies: 10
   yPosition: -3.02
   bossSpawnController: {fileID: 463891625}
+  bossPrefab: {fileID: 273406021386683082, guid: 20483ee0ab05ff044b8b758ffbc2d371, type: 3}
 --- !u!1 &807597094
 GameObject:
   m_ObjectHideFlags: 0
