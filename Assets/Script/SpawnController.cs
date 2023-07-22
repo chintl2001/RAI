@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnController : MonoBehaviour
+public class SpawnController : MonoBehaviour, IDataPresistent
 {
     public ObjectPooling objectPool;
-    public Transform playerTransform;
-    public float minDistanceBetweenEnemies = 3f;
-    public float maxDistanceBetweenEnemies = 10f;
-    public int totalNumberOfEnemies = 10;
+    public Transform playerTransform; // Transform của player
+    public float minDistanceBetweenEnemies = 3f; // Khoảng cách tối thiểu giữa các quái
+    public float maxDistanceBetweenEnemies = 10f; // Khoảng cách tối đa giữa các quái
+    public int totalNumberOfEnemies = 10; // Tổng số lượng quái cần spawn
     public float yPosition = -3.321175f;
     public SpawnBossController bossSpawnController;
-    public GameObject bossPrefab;
-
-    private EnemyFactory enemyFactory;
+    SpawnController spawnController; // Assign this reference to the SpawnController
+    GameData gameData = DataPresistent.instance.gameData;
 
 
     private void Start()
     {
-        enemyFactory = new EnemyFactory(objectPool, bossPrefab);
-
+        if (gameData.enemyPositions.Count != 0)
+        {
+            return;
+        }
         int remainingEnemies = totalNumberOfEnemies;
         float currentPosition = 0f;
+
         List<float> distances = GenerateRandomDistances(remainingEnemies, minDistanceBetweenEnemies, maxDistanceBetweenEnemies);
 
         while (remainingEnemies > 0)
@@ -36,17 +38,18 @@ public class SpawnController : MonoBehaviour
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 Transform spawnPosition = spawnPositions[i];
-                GameObject enemy;
 
-                    enemy = enemyFactory.CreateNormalEnemy(spawnPosition.position);
+                GameObject prefab = objectPool.GetPooledObject();
+                prefab.transform.position = spawnPosition.position;
+                prefab.SetActive(true);
 
                 // Cập nhật vị trí hiện tại cho quái tiếp theo
                 currentPosition += distance;
             }
 
-
             remainingEnemies -= numberOfEnemies;
         }
+
     }
 
     private List<float> GenerateRandomDistances(int numberOfDistances, float minDistance, float maxDistance)
@@ -82,6 +85,42 @@ public class SpawnController : MonoBehaviour
         if (bossSpawnController != null)
         {
             bossSpawnController.SpawnBoss();
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        // Create a new GameData object if it doesn't exist
+        if (data == null)
+        {
+            data = new GameData();
+        }
+
+        // Clear the enemy position list in the GameData to store new data
+        data.enemyPositions.Clear();
+
+        // Iterate over all spawned enemies and store their positions in the GameData object
+        List<GameObject> spawnedEnemies = objectPool.GetSpawnedObjects();
+        foreach (GameObject enemy in spawnedEnemies)
+        {
+            data.enemyPositions.Add(enemy.transform.position);
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (data == null)
+        {
+            return;
+        }
+        int totalEnemies = data.enemyPositions.Count;
+        for (int i = 0; i < totalEnemies; i++)
+        {
+            Vector3 enemyPosition = data.enemyPositions[i];
+
+            GameObject prefab = objectPool.GetPooledObject();
+            prefab.transform.position = enemyPosition;
+            prefab.SetActive(true);
         }
     }
 }
