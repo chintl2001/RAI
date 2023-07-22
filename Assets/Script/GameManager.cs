@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour, IDataPresistent
     public Text HS;
     private int hs;
 
+    public GameObject health;
+
     private HighScore highScores;
 
     public static GameManager Instance { get; private set; }
