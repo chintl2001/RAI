@@ -12,24 +12,26 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour, IDataPresistent
 {
     public Text goldText;
-    private int gold;
+    public int gold;
 
     public Text droneText;
-    private int drone = 3;
+    public int drone = 3;
 
     public Text raiText;
-    private int rai;
+    public int rai;
 
     public Text HS;
-    private int hs;
+    public int hs;
 
     public GameObject health;
 
     private HighScore highScores;
 
+    public DataPresistent dataPresistent;
+
     public static GameManager Instance { get; private set; }
 
-    /*private void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -38,9 +40,9 @@ public class GameManager : MonoBehaviour, IDataPresistent
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
-    }*/
+    }
 
     private void Start()
     {
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
         // Load high score từ lưu trữ
         LoadHighScore();
     }
+
     public void IncreaseGold()
     {
         gold++;
@@ -63,7 +66,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     }
     public void DecreaseGold()
     {
-        gold -= 30;
+        gold -= 10;
         goldText.text = gold.ToString();
     }
     public void DecreaseDrone()
@@ -102,7 +105,6 @@ public class GameManager : MonoBehaviour, IDataPresistent
         drone++;
         droneText.text = drone.ToString();
     }
-
     public void LoadData(GameData data)
     {
         this.gold = data.gold;

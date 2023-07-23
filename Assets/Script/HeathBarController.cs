@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HeathBarController : MonoBehaviour
+public class HeathBarController : MonoBehaviour, IDataPresistent
 {
     public Image foreground; // Hình ảnh foreground
     public float maxHealth = 5f; // Sức mạnh tối đa
     private float health; // Sức mạnh hiện tại
     private int enemyCount; // Số lượng quái
+
+
 
     private void Start()
     {
@@ -28,18 +30,20 @@ public class HeathBarController : MonoBehaviour
         }
         if (health == 0)
         {
-           // GameManager.Instance.IncreaseGold5();
-            SceneManager.LoadScene("Upgrade");
+            GameManager.Instance.IncreaseGold5();
+            PauseOptions.Instance.SaveGame();
+            PauseOptions.Instance.UpgradeGame();
+            GameManager.Instance.health.SetActive(false);
+            //SceneManager.LoadScene("Upgrade");
         }
     }
-
 
     private void UpdateHealthUI()
     {
         Debug.Log("Foreground: " + foreground);
         float fillValue = health / maxHealth;
         Debug.Log("Fill Value: " + fillValue);
-        foreground.fillAmount =  health/ maxHealth;
+        foreground.fillAmount = health / maxHealth;
     }
 
     private void DestroyEnemy()
@@ -56,5 +60,14 @@ public class HeathBarController : MonoBehaviour
     {
         enemyCount--;
     }
-   
+
+    public void LoadData(GameData data)
+    {
+        GameManager.Instance.LoadData(data);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        GameManager.Instance.SaveData(ref data);
+    }
 }
