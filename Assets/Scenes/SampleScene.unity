@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &22085859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 741, y: -45}
+  m_AnchoredPosition: {x: 615, y: -39}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &69337257
@@ -731,7 +731,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1996297638}
+        m_TargetAssemblyTypeName: HealthUpButton, Assembly-CSharp
+        m_MethodName: IncreaseHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1996297638}
         m_TargetAssemblyTypeName: HealthUpButton, Assembly-CSharp
         m_MethodName: DecreaseGold
         m_Mode: 1
@@ -1880,7 +1892,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -420, y: -45}
+  m_AnchoredPosition: {x: -214, y: -40}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567689685
@@ -1991,7 +2003,6 @@ MonoBehaviour:
   totalNumberOfEnemies: 10
   yPosition: -0.38
   bossSpawnController: {fileID: 463891625}
-  bossPrefab: {fileID: 0}
 --- !u!1 &577521137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,7 +2538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785733797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.14, y: -4.19, z: 0}
+  m_LocalPosition: {x: 10.79, y: -4.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2550,10 +2561,9 @@ MonoBehaviour:
   playerTransform: {fileID: 5387241085468206085}
   minDistanceBetweenEnemies: 5
   maxDistanceBetweenEnemies: 10
-  totalNumberOfEnemies: 3
+  totalNumberOfEnemies: 5
   yPosition: -3.02
   bossSpawnController: {fileID: 463891625}
-  bossPrefab: {fileID: 273406021386683082, guid: 20483ee0ab05ff044b8b758ffbc2d371, type: 3}
 --- !u!1 &807597094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2740,7 +2750,7 @@ GameObject:
   - component: {fileID: 1003378905}
   - component: {fileID: 1003378904}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Opacity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4002,7 +4012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 947, y: -45}
+  m_AnchoredPosition: {x: 804, y: -39}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1427005516
@@ -4125,7 +4135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1430580230
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4287,19 +4297,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1996297637}
-        m_TargetAssemblyTypeName: Upgrade, Assembly-CSharp
-        m_MethodName: ResumeGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1996297638}
         m_TargetAssemblyTypeName: HealthUpButton, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
@@ -4496,7 +4494,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1530542336
@@ -4655,7 +4653,7 @@ MonoBehaviour:
   rai: 0
   HS: {fileID: 1427005518}
   hs: 0
-  health: {fileID: 0}
+  health: {fileID: 577521137}
   dataPresistent: {fileID: 0}
 --- !u!1 &1610482619
 GameObject:
@@ -5343,7 +5341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1176091982860876424, guid: 867d969b2bbf0cd40ae509ab78fa6965, type: 3}
-  poolSize: 3
+  poolSize: 5
 --- !u!4 &1785113279
 Transform:
   m_ObjectHideFlags: 0
@@ -6157,7 +6155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1936469062
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6222,9 +6220,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1996297637}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Upgrade, Assembly-CSharp
-        m_MethodName: UpgradeGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6233,7 +6231,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
 --- !u!114 &1936469064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6425,6 +6423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseScreen: {fileID: 1599712515}
+  UpgradeScreen: {fileID: 687238784}
 --- !u!114 &1996297636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6475,6 +6474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notifyText: {fileID: 230763096}
   notifyImg: {fileID: 402423785}
+  continueGameButton: {fileID: 1493201424}
 --- !u!1 &2028464987
 GameObject:
   m_ObjectHideFlags: 0

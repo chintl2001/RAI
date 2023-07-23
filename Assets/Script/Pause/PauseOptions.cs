@@ -7,18 +7,45 @@ public class PauseOptions : MonoBehaviour
 {
     public GameObject PauseScreen;
 
+    public GameObject UpgradeScreen;
+
+
     bool GamePaused;
+
+    bool GameUpgrade;
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         GamePaused = false;
+
+        GameUpgrade = false;
+
+
+    }
+
+    public static PauseOptions Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GamePaused)
+        if (GamePaused || GameUpgrade)
         {
             Time.timeScale = 0;
         }
@@ -40,6 +67,19 @@ public class PauseOptions : MonoBehaviour
         PauseScreen.SetActive(false);
     }
 
+    public void UpgradeGame()
+    {
+        GameUpgrade = true;
+        UpgradeScreen.SetActive(true);
+    }
+
+    public void FinishUpgradeGame()
+    {
+        GameUpgrade = false;
+        UpgradeScreen.SetActive(false);
+    }
+
+
     public void SaveGame()
     {
         DataPresistent.instance.SaveGame();
@@ -47,7 +87,6 @@ public class PauseOptions : MonoBehaviour
 
     public void ExitGame()
     {
-       // SpawnController.instance.ResetSpawnState(); // Đặt lại trạng thái spawn
         SceneManager.LoadScene("Start");
     }
 }
