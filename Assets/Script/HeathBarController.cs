@@ -31,9 +31,9 @@ public class HeathBarController : MonoBehaviour, IDataPresistent
         if (health == 0)
         {
             GameManager.Instance.IncreaseGold5();
-            PauseOptions.Instance.SaveGame();
             PauseOptions.Instance.UpgradeGame();
             GameManager.Instance.health.SetActive(false);
+            PauseOptions.Instance.SaveGame();
             //SceneManager.LoadScene("Upgrade");
         }
     }
@@ -63,7 +63,7 @@ public class HeathBarController : MonoBehaviour, IDataPresistent
 
     public void LoadData(GameData data)
     {
-        GameManager.Instance.LoadData(data);
+       GameManager.Instance.LoadData(data);
     }
 
     public void SaveData(ref GameData data)

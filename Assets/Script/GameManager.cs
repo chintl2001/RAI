@@ -59,6 +59,16 @@ public class GameManager : MonoBehaviour, IDataPresistent
         gold++;
         goldText.text = gold.ToString();
     }
+    public void IncreaseGold(int amount)
+    {
+        gold += amount;
+        goldText.text = gold.ToString();
+    }
+    public void IncreaseGold2()
+    {
+        gold+=2;
+        goldText.text = gold.ToString();
+    }
     public void IncreaseGold5()
     {
         gold += 5;
@@ -98,7 +108,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     {
         rai++;
         raiText.text = rai.ToString();
-
+       
     }
     public void IncreaseDrone()
     {

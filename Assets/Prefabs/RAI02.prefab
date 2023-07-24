@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8104341675998880732}
   - component: {fileID: 6883168481836602175}
   - component: {fileID: -4538115707751786366}
-  m_Layer: 0
+  - component: {fileID: -4516998961474089562}
+  m_Layer: 7
   m_Name: RAI02
   m_TagString: BigRai
   m_Icon: {fileID: 0}
@@ -469,3 +470,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashEffect: {fileID: 6883168481836602175}
+--- !u!114 &-4516998961474089562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273406021386683082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1213eb8c7b5a307488e2438ba3ec172f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7425595468528286811, guid: 34bc08f49a023974c95e69c12a44129c, type: 3}
+  targetX: -7.27
+  targetY: -3.5
+  bulletSpeed: 20
+  fireInterval: 2
